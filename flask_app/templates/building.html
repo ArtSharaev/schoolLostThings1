@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Потеряшки</title>
+    <link rel="icon" type="images/x-icon" href="static/images/logo.ico"/>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/gallery.css') }}">
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/style.css') }}">
+    <script src={{ url_for('static', filename='gallery.js') }}></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter&family=Manrope:wght@500&display=swap"
+          rel="stylesheet">
+</head>
+<body>
+<h1>{{ building_name }}</h1>
+<h5>(Бывшая школа {{ building_num }})</h5>
+<div>
+    {% if not photos %}
+        <h2><br><br><br><br><br>Здесь пока пусто</h2>
+    {% else %}
+        <div class="building">
+            <div class="thingrow">
+                <div class="thingcolumn">
+                    {% for file in photos[0::3] %}
+                        {% set info = file.split("/")[-1] %}
+                        {% set date = '.'.join(info.split("--")[0].split('-')) %}
+                        {% set number = info.split("--")[1] %}
+                        <div class="gallery">
+                            <img class="round"
+                                 src="{{ url_for('static',  filename=file) }}"
+                                 width="400" alt="">
+                            <h7>Найдено {{ date }}</h7>
+                            <h8>Кабинет {{ number }}</h8>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="thingcolumn">
+                    {% for file in photos[1::3] %}
+                        {% set info = file.split("/")[-1] %}
+                        {% set date = '.'.join(info.split("--")[0].split('-')) %}
+                        {% set number = info.split("--")[1] %}
+                        <div class="gallery">
+                            <img class="round"
+                                 src="{{ url_for('static',  filename=file) }}"
+                                 width="400" alt="">
+                            <h7>Найдено {{ date }}</h7>
+                            <h8>Кабинет {{ number }}</h8>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="thingcolumn">
+                    {% for file in photos[2::3] %}
+                        {% set info = file.split("/")[-1] %}
+                        {% set date = '.'.join(info.split("--")[0].split('-')) %}
+                        {% set number = info.split("--")[1] %}
+                        <div class="gallery">
+                            <img class="round"
+                                 src="{{ url_for('static',  filename=file) }}"
+                                 width="400" alt="">
+                            <h7>Найдено {{ date }}</h7>
+                            <h8>Кабинет {{ number }}</h8>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    {% endif %}
+</div>
+<br>
+</body>
+</html>
